@@ -10,15 +10,6 @@
 
 */
 
-@keyframes fill-like {
-  from {
-    fill: transparent;
-  }
-  to {
-    fill: var(--like-color);
-  }
-}
-
 @keyframes make-larger {
   from {
     transform: scale(1);
@@ -48,35 +39,44 @@
   opacity: 0;
 }
 
+.contour {
+  transition: fill 0.1s linear;
+}
+
 .main-body {
-  transition: fill 0.3s 0.05s ease;
+  transition: fill 0.3s linear;
 }
 
 .core {
-  transition: fill 0.3s ease;
+  transition: fill 0.3s linear 0.3s;
 }
 
 /* hover */
 
 .card__icon-button:hover .main-body {
   fill: var(--main-color);
+  transition: fill 0.3s linear 0.05s;
 }
 
 .card__icon-button:hover .core {
   fill: var(--main-color);
-  transition-delay: 0s;
+  transition: fill 0.3s linear;
 }
 
 .card__icon-button:not(:hover) .core {
-  transition-delay: 0.03s;
+  transition: fill 0.3s linear 0.03s;
 }
 
 /* active */
 
-.card__icon-button:active .main-body,
 .card__icon-button:active .core {
   fill: var(--like-color);
-  transition: fill 0.3s ease;
+  transition: fill 0.3s linear;
+}
+
+.card__icon-button:active .main-body {
+  fill: var(--like-color);
+  transition: fill 0.3s linear 0.05s;
 }
 
 /* focus */
@@ -86,32 +86,44 @@
   outline: none;
 }
 
+.card__icon-button {
+  transition: outline 0.3s ease;
+}
+
 .button:focus-visible {
   box-shadow: 2px 2px 0 var(--main-color);
+}
+
+.card__icon-button:focus-visible {
+  outline: 2px solid var(--main-color);
+  outline-offset: -2px;
 }
 
 /* like on click animation */
 
 .card__icon-button:has(.is-liked) .core {
-  animation: fill-like 0.3s linear forwards;
+  fill: var(--like-color);
+  transition: fill 0.3s linear;
 }
 
 .card__icon-button:has(.is-liked) .main-body {
-  animation: fill-like 0.3s linear forwards;
-  animation-delay: 0.03s;
+  fill: var(--like-color);
+  transition: fill 0.3s linear 0.05s;
 }
 
 .card__icon-button:has(.is-liked) .contour {
-  animation: fill-like 0.3s linear forwards;
-  animation-delay: 0.06s;
+  fill: var(--like-color);
+  transition: fill 0.3s linear 0.06s;
 }
 
 .card__icon-button:has(.is-liked) {
-  transition-delay: 0.1s;
-  animation: make-larger 0.3s ease-in;
+  animation: make-larger 0.3s ease-in 0.1s;
 }
 
 .card__icon-button:has(.is-liked) .sparks {
-  animation: make-sparkly 0.3s ease-in;
-  animation-delay: 0.13s;
+  animation: make-sparkly 0.3s ease-in 0.3s;
 }
+
+
+
+
